@@ -1,4 +1,5 @@
 import NotesPage from "./pages/NotesPage"
+import NotesProvider from "./context/NoteContext"
 
 
 
@@ -6,8 +7,11 @@ function App() {
  
 
   return (
-    <div>
+    <div id="app">
+      <NotesProvider>
       <NotesPage />
+      </NotesProvider>
+      
     </div>
   )
 }

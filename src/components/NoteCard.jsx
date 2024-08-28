@@ -2,6 +2,10 @@ import { useRef, useEffect, useState } from 'react'
 import Trash from '../icons/Trash'
 import { setNewOffset, autoGrow, setZindex, bodyParser } from '../utils'
 import { db } from "../appwrite/databases";
+import Spinner from '../icons/Spinner';
+import DeleteButton from './DeleteButton';
+
+
 const NoteCard = ({ note }) => {
     let [position, setPosition] = useState(JSON.parse(note.position));
     const colors = JSON.parse(note.colors);
@@ -38,14 +42,18 @@ const NoteCard = ({ note }) => {
     
 
     const mouseDown = (e) => {
-        mouseStartPos.x = e.clientX;
-        mouseStartPos.y = e.clientY;
-        document.addEventListener('mousemove', mouseMove);
-        document.addEventListener('mouseup', mouseUp);
-
-        setZindex(cardRef.current);
-        
+        if (e.target.className === "card-header") {
+     
+            setZindex(cardRef.current);
+     
+            mouseStartPos.x = e.clientX;
+            mouseStartPos.y = e.clientY;
+     
+            document.addEventListener("mousemove", mouseMove);
+            document.addEventListener("mouseup", mouseUp);
+        }
     };
+    
     const mouseMove = (e) => {
         const mouseMoveDir = {
             x: mouseStartPos.x - e.clientX,
@@ -103,11 +111,14 @@ const NoteCard = ({ note }) => {
             style={{ backgroundColor: colors.colorHeader }}
             >
             
-                <Trash />
+            <DeleteButton noteId={note.$id} />
 
                 {saving && (
         <div className="card-saving">
-            <span style={{ color: colors.colorText }}>Saving...</span>
+        <Spinner color={colors.colorText} />
+            <span style={{ color: colors.colorText }}>
+                Saving...
+                </span>
         </div>
         
     )};
