@@ -3,7 +3,7 @@ import { db } from "../appwrite/databases";
  
 
  
-    const DeleteButton = ({ noteId, setNotes }) => {
+    const DeleteButton = ({ noteId }) => {
  
         const handleDelete = async (e) => {
             db.notes.delete(noteId);
