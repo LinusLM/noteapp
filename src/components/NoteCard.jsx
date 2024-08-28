@@ -18,6 +18,7 @@ const NoteCard = ({ note }) => {
 
     useEffect(() => {
         autoGrow(textAreaRef);
+        setZindex(cardRef.current);
     }, []);
 
     const keyUpTimer = useRef(null);
