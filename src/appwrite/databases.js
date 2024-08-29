@@ -1,21 +1,29 @@
-import { databases, collections } from "./config";
+import { databases } from "./config";
 import { ID } from "appwrite";
- 
+
+const collections = [
+    {
+        name: "notes",
+        id: import.meta.env.VITE_COLLECTION_NOTES_ID,
+    },
+];
+
 const db = {};
- 
+
 collections.forEach((collection) => {
     db[collection.name] = {
         create: async (payload, id = ID.unique()) => {
             return await databases.createDocument(
-                collection.dbId,
+                import.meta.env.VITE_DATABASE_ID,
                 collection.id,
                 id,
                 payload
             );
         },
         update: async (id, payload) => {
+            console.log("Updating:", id);
             return await databases.updateDocument(
-                collection.dbId,
+                import.meta.env.VITE_DATABASE_ID,
                 collection.id,
                 id,
                 payload
@@ -23,26 +31,26 @@ collections.forEach((collection) => {
         },
         delete: async (id) => {
             return await databases.deleteDocument(
-                collection.dbId,
+                import.meta.env.VITE_DATABASE_ID,
                 collection.id,
                 id
             );
         },
         get: async (id) => {
             return await databases.getDocument(
-                collection.dbId,
+                import.meta.env.VITE_DATABASE_ID,
                 collection.id,
                 id
             );
         },
         list: async (queries) => {
             return await databases.listDocuments(
-                collection.dbId,
+                import.meta.env.VITE_DATABASE_ID,
                 collection.id,
                 queries
             );
         },
     };
 });
- 
+
 export { db };

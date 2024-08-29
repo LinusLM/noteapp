@@ -1,3 +1,5 @@
+import React from "react";
+
 const Spinner = ({ color = "#fff", size = "20" }) => {
     return (
         <svg
@@ -18,5 +20,5 @@ const Spinner = ({ color = "#fff", size = "20" }) => {
         </svg>
     );
 };
- 
+
 export default Spinner;
