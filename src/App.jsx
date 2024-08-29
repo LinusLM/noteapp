@@ -1,11 +1,13 @@
 import NotesPage from "./pages/NotesPage";
 import NotesProvider from "./context/NotesContext";
 import { SignedIn, SignedOut, SignInButton, UserButton } from "@clerk/clerk-react";
+import { Analytics } from "@vercel/analytics/react";
 
 function App() {
     return (
         <div id="app">
-            <SignedIn>
+<Analytics>
+<SignedIn>
             <NotesProvider>
                 <UserButton />
                 <NotesPage />
@@ -15,6 +17,8 @@ function App() {
                 <h1>Please sign in to use this app</h1>
                 <SignInButton />
             </SignedOut>
+ </Analytics>
+            
         </div>
     );
 }
