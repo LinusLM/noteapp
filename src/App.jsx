@@ -6,7 +6,7 @@ import { Analytics } from "@vercel/analytics/react";
 function App() {
     return (
         <div id="app">
-<Analytics>
+
 <SignedIn>
             <NotesProvider>
                 <UserButton />
@@ -17,7 +17,7 @@ function App() {
                 <h1>Please sign in to use this app</h1>
                 <SignInButton />
             </SignedOut>
- </Analytics>
+ 
             
         </div>
     );
